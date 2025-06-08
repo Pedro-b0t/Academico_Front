@@ -1,6 +1,8 @@
 package com.sistema.gui;
 
 import com.sistema.dao.AlunoDAO;
+import javax.swing.*;
+import java.awt.event.*;
 import com.sistema.dao.ProfessorDAO;
 import com.sistema.model.Aluno;
 import com.sistema.model.Professor;
@@ -16,7 +18,7 @@ public class TelaLogin extends JFrame {
 
     public TelaLogin() {
         setTitle("Login - Sistema Acadêmico");
-        setSize(350, 250);
+        setSize(500, 350);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLayout(null);
 
@@ -40,12 +42,12 @@ public class TelaLogin extends JFrame {
         tipoUsuarioLabel.setBounds(30, 110, 100, 25);
         add(tipoUsuarioLabel);
 
-        tipoUsuarioBox = new JComboBox<>(new String[]{"Aluno", "Professor"});
+        tipoUsuarioBox = new JComboBox<>(new String[]{"Aluno", "Professor", "Admin"});
         tipoUsuarioBox.setBounds(130, 110, 150, 25);
         add(tipoUsuarioBox);
 
         JButton loginButton = new JButton("Entrar");
-        loginButton.setBounds(100, 160, 120, 30);
+        loginButton.setBounds(140, 230, 120, 25);
         add(loginButton);
 
         loginButton.addActionListener(new ActionListener() {
@@ -77,6 +79,28 @@ public class TelaLogin extends JFrame {
             }
         });
 
+        
+        tipoUsuarioBox.addActionListener(e ->{
+        	String tipoSelecionado = (String) tipoUsuarioBox.getSelectedItem();
+        	if ("Professor".equals(tipoSelecionado)) {
+        		matriculaLabel.setText("Nome:");
+        	}else {
+        		matriculaLabel.setText("Matrícula:");
+        	}
+        });
+        
+       // botão de cadastro
+        JButton cadastrarButton = new JButton("Cadastre-se");
+        cadastrarButton.setBounds(130, 150, 150, 25); // logo abaixo da senha
+        add(cadastrarButton);
+
+        // Listener para abrir tela de cadastro (exemplo simples)
+        cadastrarButton.addActionListener(e -> {
+           new TelaCadastro();
+            //abre a tela de cadastro
+        });
+
+        
         setVisible(true);
     }
 

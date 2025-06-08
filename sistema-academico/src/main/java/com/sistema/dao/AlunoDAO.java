@@ -12,7 +12,7 @@ public class AlunoDAO {
 
     // Adiciona um novo aluno no banco
     public void adicionarAluno(Aluno aluno) {
-        String sql = "INSERT INTO aluno (nome, matricula, curso, senha) VALUES (?, ?, ?, ?)";
+    	String sql = "INSERT INTO \"Aluno\" (nome, matricula, curso, senha) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = Conexao.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -52,7 +52,8 @@ public class AlunoDAO {
 
     // Autentica o aluno usando matrícula e senha
     public Aluno autenticar(String matricula, String senha) {
-        String sql = "SELECT * FROM aluno WHERE matricula = ? AND senha = ?";
+    	String sql = "SELECT * FROM \"Aluno\" WHERE matricula = ? AND senha = ?";
+
 
         try (Connection conn = Conexao.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
