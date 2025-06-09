@@ -12,7 +12,7 @@ public class AlunoDAO {
 
     // Adiciona um novo aluno no banco
     public void adicionarAluno(Aluno aluno) {
-    	String sql = "INSERT INTO \"Aluno\" (nome, matricula, curso, senha) VALUES (?, ?, ?, ?)";
+    	String sql = "INSERT INTO \"Aluno\" (nome, loginInput, curso, senha) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = Conexao.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -41,7 +41,7 @@ public class AlunoDAO {
                 System.out.println(
                     "ID: " + rs.getInt("id") +
                     ", Nome: " + rs.getString("nome") +
-                    ", Matrícula: " + rs.getString("matricula") +
+                    ", Matricula: " + rs.getString("loginInput") +
                     ", Curso: " + rs.getString("curso")
                 );
             }
@@ -51,14 +51,14 @@ public class AlunoDAO {
     }
 
     // Autentica o aluno usando matrícula e senha
-    public Aluno autenticar(String matricula, String senha) {
-    	String sql = "SELECT * FROM \"Aluno\" WHERE matricula = ? AND senha = ?";
+    public Aluno autenticar(String loginInput, String senha) {
+    	String sql = "SELECT * FROM \"Aluno\" WHERE loginInput = ? AND senha = ?";
 
 
         try (Connection conn = Conexao.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
 
-            stmt.setString(1, matricula);
+            stmt.setString(1, loginInput);
             stmt.setString(2, senha);
 
             try (ResultSet rs = stmt.executeQuery()) {
@@ -66,7 +66,7 @@ public class AlunoDAO {
                     Aluno aluno = new Aluno();
                     aluno.setId(rs.getInt("id"));
                     aluno.setNome(rs.getString("nome"));
-                    aluno.setMatricula(rs.getString("matricula"));
+                    aluno.setMatricula(rs.getString("loginInput"));
                     aluno.setCurso(rs.getString("curso"));
                     aluno.setSenha(rs.getString("senha")); // caso queira manter a senha no objeto
 

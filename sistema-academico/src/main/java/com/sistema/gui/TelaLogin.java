@@ -1,9 +1,11 @@
 package com.sistema.gui;
 
+import com.sistema.dao.AdminDAO;
 import com.sistema.dao.AlunoDAO;
 import javax.swing.*;
 import java.awt.event.*;
 import com.sistema.dao.ProfessorDAO;
+import com.sistema.model.Admin;
 import com.sistema.model.Aluno;
 import com.sistema.model.Professor;
 
@@ -61,21 +63,31 @@ public class TelaLogin extends JFrame {
                     AlunoDAO alunoDAO = new AlunoDAO();
                     Aluno aluno = alunoDAO.autenticar(matricula, senha);
                     if (aluno != null) {
-                        new TelaAluno(aluno);
+                        new TelaAluno(aluno).setVisible(true);
                         dispose();
                     } else {
                         JOptionPane.showMessageDialog(null, "Login de aluno inválido");
                     }
-                } else {
+                } else if (tipo.equals("Professor")) {
                     ProfessorDAO professorDAO = new ProfessorDAO();
                     Professor professor = professorDAO.autenticar(matricula, senha);
                     if (professor != null) {
-                        new TelaProfessor(professor);
+                        new TelaProfessor(professor).setVisible(true);
                         dispose();
                     } else {
                         JOptionPane.showMessageDialog(null, "Login de professor inválido");
                     }
+                } else if (tipo.equals("Admin")) {
+                    AdminDAO adminDAO = new AdminDAO();
+                    Admin admin = adminDAO.autenticar(matricula, senha);  // aqui pode mudar para "usuario" se preferir
+                    if (admin != null) {
+                        new TelaAdmin().setVisible(true);
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Login de admin inválido");
+                    }
                 }
+
             }
         });
 
@@ -83,21 +95,23 @@ public class TelaLogin extends JFrame {
         tipoUsuarioBox.addActionListener(e ->{
         	String tipoSelecionado = (String) tipoUsuarioBox.getSelectedItem();
         	if ("Professor".equals(tipoSelecionado)) {
-        		matriculaLabel.setText("Nome:");
+        		matriculaLabel.setText("Usuário:");
         	}else {
         		matriculaLabel.setText("Matrícula:");
         	}
         });
         
-       // botão de cadastro
-        JButton cadastrarButton = new JButton("Cadastre-se");
-        cadastrarButton.setBounds(130, 150, 150, 25); // logo abaixo da senha
-        add(cadastrarButton);
-
-        // Listener para abrir tela de cadastro (exemplo simples)
-        cadastrarButton.addActionListener(e -> {
-           new TelaCadastro();
-            //abre a tela de cadastro
+        
+        tipoUsuarioBox.addActionListener(e -> {
+            String tipoSelecionado = (String) tipoUsuarioBox.getSelectedItem();
+            
+            if ("Professor".equalsIgnoreCase(tipoSelecionado)) {
+                matriculaLabel.setText("Nome:");
+            } else if ("Admin".equalsIgnoreCase(tipoSelecionado)) {
+                matriculaLabel.setText("Login Admin:");
+            } else {
+                matriculaLabel.setText("Matrícula:");
+            }
         });
 
         

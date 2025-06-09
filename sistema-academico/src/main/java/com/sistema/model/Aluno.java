@@ -9,10 +9,10 @@ public class Aluno {
 
     public Aluno() {}
 
-    public Aluno(int id, String nome, String matricula, String curso, String senha) {
+    public Aluno(int id, String nome, String loginInput, String curso, String senha) {
         this.id = id;
         this.nome = nome;
-        this.matricula = matricula;
+        this.matricula = loginInput;
         this.curso = curso;
         this.senha = senha;
     }
@@ -37,8 +37,8 @@ public class Aluno {
         return matricula;
     }
 
-    public void setMatricula(String matricula) {
-        this.matricula = matricula;
+    public void setMatricula(String loginInput) {
+        this.matricula = loginInput;
     }
 
     public String getCurso() {

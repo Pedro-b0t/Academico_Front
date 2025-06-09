@@ -1,42 +1,21 @@
 package com.sistema.gui;
 
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.*;
 
 public class TelaAdmin extends JFrame {
 
-	private static final long serialVersionUID = 1L;
-	private JPanel contentPane;
+    public TelaAdmin() {
+        setTitle("Área Administrativa");
+        setSize(800, 600);
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaAdmin frame = new TelaAdmin();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+        JTabbedPane abas = new JTabbedPane();
 
-	/**
-	 * Create the frame.
-	 */
-	public TelaAdmin() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+        abas.add("Cadastrar Aluno", new TelaCadastroAluno());
+        abas.add("Cadastrar Professor", new TelaCadastroProfessor());
+        abas.add("Cadastrar Curso", new TelaCadastroCurso());
 
-		setContentPane(contentPane);
-	}
-
+        add(abas);
+    }
 }
