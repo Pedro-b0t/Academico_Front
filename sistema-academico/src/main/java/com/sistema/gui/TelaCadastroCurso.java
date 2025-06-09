@@ -23,6 +23,8 @@ public class TelaCadastroCurso extends JPanel {
         codigoField = new JTextField();
 
         cadastrarButton = new JButton("Cadastrar");
+        cadastrarButton.setForeground(new Color(0, 0, 0));
+        cadastrarButton.setBackground(new Color(255, 255, 255));
 
         add(nomeLabel);
         add(nomeField);
