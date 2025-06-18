@@ -18,6 +18,9 @@ public class TelaProfessor extends JFrame {
         
         JButton btnNotas = new JButton("Atribuir Notas");
         btnNotas.setBounds(100, 70, 200, 30);
+        btnNotas.addActionListener(e -> {
+        	new Tela_Lancar_Nota(professor.getId()).setVisible(true);
+        });
         add(btnNotas);
         
         JButton btnChamada = new JButton("Fazer Chamada");
@@ -27,10 +30,13 @@ public class TelaProfessor extends JFrame {
         JButton btnSair = new JButton("Sair");
         btnSair.setBounds(100, 180, 200, 30);
         add(btnSair);
+        
 
         btnSair.addActionListener(e -> {
             dispose();
             new TelaLogin(); // volta pra tela de login
+            
+
         });
 
         setVisible(true);
